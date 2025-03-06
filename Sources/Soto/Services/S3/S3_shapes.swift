@@ -1159,14 +1159,17 @@ extension S3 {
         public let checksumCRC32: String?
         /// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated with multipart uploads, see  Checking object integrity in the Amazon S3 User Guide.
         public let checksumCRC32C: String?
+        /// The Base64 encoded, 64-bit CRC64NVME checksum of the object. This checksum is present if the object was uploaded with the CRC64NVME checksum algorithm, or if the object was uploaded without a checksum (and Amazon S3 added the default checksum, CRC64NVME, to the uploaded object). For more information, see Checking object integrity in the Amazon S3 User Guide.
+        public let checksumCRC64NVME: String?
         /// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated with multipart uploads, see  Checking object integrity in the Amazon S3 User Guide.
         public let checksumSHA1: String?
         /// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated with multipart uploads, see  Checking object integrity in the Amazon S3 User Guide.
         public let checksumSHA256: String?
 
-        public init(checksumCRC32: String? = nil, checksumCRC32C: String? = nil, checksumSHA1: String? = nil, checksumSHA256: String? = nil) {
+        public init(checksumCRC32: String? = nil, checksumCRC32C: String? = nil, checksumCRC64NVME: String? = nil, checksumSHA1: String? = nil, checksumSHA256: String? = nil) {
             self.checksumCRC32 = checksumCRC32
             self.checksumCRC32C = checksumCRC32C
+            self.checksumCRC64NVME = checksumCRC64NVME
             self.checksumSHA1 = checksumSHA1
             self.checksumSHA256 = checksumSHA256
         }
@@ -1174,6 +1177,7 @@ extension S3 {
         private enum CodingKeys: String, CodingKey {
             case checksumCRC32 = "ChecksumCRC32"
             case checksumCRC32C = "ChecksumCRC32C"
+            case checksumCRC64NVME = "ChecksumCRC64NVME"
             case checksumSHA1 = "ChecksumSHA1"
             case checksumSHA256 = "ChecksumSHA256"
         }
